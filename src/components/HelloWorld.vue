@@ -9,6 +9,9 @@
 
     <el-button type="primary" style='margin-left:10px;' plain @click="openDialog1">测试Date【点击多次查看内存分配】</el-button>
 
+
+    <el-button type="primary" style='margin-left:10px;' plain @click="openDialog2">测试el-input【点击多次查看内存分配】</el-button>
+
     <el-dialog title="测试DateTime" :visible.sync="dialogVisible" v-if="dialogVisible" width="30%" :before-close="handleClose">
         <DateTimeItem></DateTimeItem>
         <span slot="footer" class="dialog-footer">
@@ -24,15 +27,24 @@
             <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
         </span>
     </el-dialog>
+
+    <el-dialog title="测试ElInput" :visible.sync="dialogVisible2" v-if="dialogVisible2" width="50%" :before-close="handleClose">
+        <ElInputItem></ElInputItem>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible2 = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
+        </span>
+    </el-dialog>
 </div>
 </template>
 
 <script>
 import DateTimeItem from "./DateTimeItem.vue";
 import DateItem from "./DateItem.vue";
+import ElInputItem  from "./ElInputItem.vue";
 export default {
     name: "HelloWorld",
-    components: { DateTimeItem: DateTimeItem, DateItem: DateItem },
+    components: { DateTimeItem: DateTimeItem, DateItem: DateItem , ElInputItem: ElInputItem},
     props: {
         msg: String,
     },
@@ -40,6 +52,7 @@ export default {
         return {
             dialogVisible: false,
             dialogVisible1: false,
+            dialogVisible2: false,
         };
     },
     methods: {
@@ -49,8 +62,13 @@ export default {
         openDialog1() {
             this.dialogVisible1 = true;
         },
+        openDialog2() {
+            this.dialogVisible2 = true;
+        },
         handleClose() {
-
+            this.dialogVisible =false;
+            this.dialogVisible1 =false;
+            this.dialogVisible2 =false;
         }
     },
 };
